@@ -1,0 +1,48 @@
+@LibraryCatalog.Api_HostAddress = https://localhost:7281
+
+### 1. GET All Books (Expect: 200 OK)
+GET {{LibraryCatalog.Api_HostAddress}}/api/books
+Accept: application/json
+
+### 2. GET Single Book by ID (Expect: 200 OK)
+GET {{LibraryCatalog.Api_HostAddress}}/api/books/1
+Accept: application/json
+
+### 3. GET Missing Book (Expect: 404 Not Found)
+GET {{LibraryCatalog.Api_HostAddress}}/api/books/99
+Accept: application/json
+
+### 4. POST Valid Book (Expect: 201 Created)
+POST {{LibraryCatalog.Api_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "isAvailable": true,
+  "yearPublished": 2008
+}
+
+### 5. POST Invalid Book (Expect: 400 Bad Request)
+POST {{LibraryCatalog.Api_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "Test Author",
+  "yearPublished": 1700
+}
+
+### 6. PUT Update Book (Expect: 204 No Content)
+PUT {{LibraryCatalog.Api_HostAddress}}/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Clean Architecture (2nd Ed)",
+  "author": "Robert C. Martin",
+  "isAvailable": false,
+  "yearPublished": 2017
+}
+
+### 7. DELETE Book (Expect: 204 No Content)
+DELETE {{LibraryCatalog.Api_HostAddress}}/api/books/2
